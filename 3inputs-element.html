@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="3inputs-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `3inputs-element`
+     * Just playing with the myscript-text-web component
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class 3inputsElement extends Polymer.Element {
+      static get is() { return '3inputs-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: '3inputs-element'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(3inputsElement.is, 3inputsElement);
+  </script>
+</dom-module>
