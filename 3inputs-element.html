@@ -1,6 +1,6 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="bower_components/polymer/polymer-element.html">
 
-<dom-module id="3inputs-element">
+<dom-module id="three-inputs-element">
   <template>
     <style>
       :host {
@@ -19,18 +19,18 @@
      * @polymer
      * @demo demo/index.html
      */
-    class 3inputsElement extends Polymer.Element {
-      static get is() { return '3inputs-element'; }
+    class ThreeInputsElement extends Polymer.Element {
+      static get is() { return 'three-inputs-element'; }
       static get properties() {
         return {
           prop1: {
             type: String,
-            value: '3inputs-element'
+            value: 'three-inputs-element'
           }
         };
       }
     }
 
-    window.customElements.define(3inputsElement.is, 3inputsElement);
+    window.customElements.define(ThreeInputsElement.is, ThreeInputsElement);
   </script>
 </dom-module>
