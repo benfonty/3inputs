@@ -1,0 +1,4 @@
+class ApplicationKeys {
+    static applicationKey = "";
+    static hmacKey = "";
+}

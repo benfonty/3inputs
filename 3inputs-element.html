@@ -1,5 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 <link rel="import" href="bower_components/myscript-text-web/myscript-text-web.html">
+<script type= "text/javascript" src="application-keys.js"></script>
 
 <dom-module id="three-inputs-element">
   <template>
@@ -14,7 +15,7 @@
   <input id="input1"></input>
   <input id="input2"></input>
   <input id="input3"></input>
-  <myscript-text-web unloaded id="textInput" host="webdemoapi.myscript.com" applicationkey="" hmackey="" language="fr_FR"></myscript-text-web>
+  <myscript-text-web unloaded="[[myUnloaded]]" id="textInput" host="webdemoapi.myscript.com" applicationkey="[[myApplicationKey]]" hmackey="[[myHmacKey]]" language="fr_FR"></myscript-text-web>
   </template>
 
   <script>
@@ -30,11 +31,23 @@
       static get is() { return 'three-inputs-element'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'three-inputs-element'
+          myApplicationKey: String,
+          myHmacKey: String,
+          myUnloaded: {
+            type: Boolean,
+            value: true
           }
         };
+      }
+
+      ready() {
+        super.ready();
+        Polymer.RenderStatus.afterNextRender(this, () => {
+          console.log("toto");
+          this.myApplicationKey = applicationkeys.applicationKey;
+          this.myHmacKey = applicationkeys.hmacKey;
+          this.myUnloaded = false;
+        });
       }
     }
 
