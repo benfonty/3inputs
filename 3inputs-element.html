@@ -13,11 +13,11 @@
         height: calc(100vh - 50px);
       }
     </style>
-  <paper-input id="input1" on-focused-changed="_focus" value="{{bindValue1}}">
+  <paper-input id="input1" on-focused-changed="_focus" >
   </paper-input>
-  <paper-input id="input2" on-focused-changed="_focus" value="{{bindValue2}}">
+  <paper-input id="input2" on-focused-changed="_focus" >
   </paper-input>
-  <paper-input id="input3" on-focused-changed="_focus" value="{{bindValue3}}">
+  <paper-input id="input3" on-focused-changed="_focus" >
   </paper-input>
   <myscript-text-web on-exported="_export" unloaded="[[myUnloaded]]" id="textInput" host="webdemoapi.myscript.com" applicationkey="[[myApplicationKey]]" hmackey="[[myHmacKey]]" language="fr_FR"></myscript-text-web>
   </template>
@@ -41,15 +41,21 @@
             type: Boolean,
             value: true
           },
-          bindValue1: String,
-          bindValue2: String,
-          bindValue3: String,
-          activeElement: Object
+          activeElement: Object,
         };
       }
 
       _focus(e) {
-        this.activeElement = e.path[0];
+        if (e.detail.value) {
+          this.activeElement = e.path[0];
+          this.$.textInput.clear();
+          if (this.activeElement.value !== undefined) {
+            this.$.textInput.importContent(
+                    {x:0,y:0},
+                    this.activeElement.value,
+                    "text/plain");
+          }
+        }
       }
 
       _export(e) {
