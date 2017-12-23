@@ -1,6 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 <link rel="import" href="bower_components/myscript-text-web/myscript-text-web.html">
-<link rel="import" href="bower_components/iron-input/iron-input.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
 <script type= "text/javascript" src="application-keys.js"></script>
 
 <dom-module id="three-inputs-element">
@@ -13,15 +13,12 @@
         height: calc(100vh - 50px);
       }
     </style>
-  <iron-input bind-value="{{bindValue1}}">
-    <input>
-  </iron-input>
-  <iron-input bind-value="{{bindValue2}}">
-    <input>
-  </iron-input>
-  <iron-input bind-value="{{bindValue3}}">
-    <input>
-  </iron-input>
+  <paper-input id="input1" on-focused-changed="_focus" value="{{bindValue1}}">
+  </paper-input>
+  <paper-input id="input2" on-focused-changed="_focus" value="{{bindValue2}}">
+  </paper-input>
+  <paper-input id="input3" on-focused-changed="_focus" value="{{bindValue3}}">
+  </paper-input>
   <myscript-text-web on-exported="_export" unloaded="[[myUnloaded]]" id="textInput" host="webdemoapi.myscript.com" applicationkey="[[myApplicationKey]]" hmackey="[[myHmacKey]]" language="fr_FR"></myscript-text-web>
   </template>
 
@@ -47,11 +44,16 @@
           bindValue1: String,
           bindValue2: String,
           bindValue3: String,
+          activeElement: Object
         };
       }
 
+      _focus(e) {
+        this.activeElement = e.path[0];
+      }
+
       _export(e) {
-        this.bindValue1 = e.detail.exports["text/plain"];
+        this.activeElement.value = e.detail.exports["text/plain"];
       }
 
       ready() {
