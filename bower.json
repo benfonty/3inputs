@@ -4,7 +4,8 @@
   "main": "3inputs-element.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "myscript-text-web": "^4.0.1"
+    "myscript-text-web": "^4.0.1",
+    "iron-input": "PolymerElements/iron-input#^2.0.1"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

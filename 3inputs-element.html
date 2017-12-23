@@ -1,5 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 <link rel="import" href="bower_components/myscript-text-web/myscript-text-web.html">
+<link rel="import" href="bower_components/iron-input/iron-input.html">
 <script type= "text/javascript" src="application-keys.js"></script>
 
 <dom-module id="three-inputs-element">
@@ -12,10 +13,16 @@
         height: calc(100vh - 50px);
       }
     </style>
-  <input id="input1"></input>
-  <input id="input2"></input>
-  <input id="input3"></input>
-  <myscript-text-web unloaded="[[myUnloaded]]" id="textInput" host="webdemoapi.myscript.com" applicationkey="[[myApplicationKey]]" hmackey="[[myHmacKey]]" language="fr_FR"></myscript-text-web>
+  <iron-input bind-value="{{bindValue1}}">
+    <input>
+  </iron-input>
+  <iron-input bind-value="{{bindValue2}}">
+    <input>
+  </iron-input>
+  <iron-input bind-value="{{bindValue3}}">
+    <input>
+  </iron-input>
+  <myscript-text-web on-exported="_export" unloaded="[[myUnloaded]]" id="textInput" host="webdemoapi.myscript.com" applicationkey="[[myApplicationKey]]" hmackey="[[myHmacKey]]" language="fr_FR"></myscript-text-web>
   </template>
 
   <script>
@@ -36,14 +43,20 @@
           myUnloaded: {
             type: Boolean,
             value: true
-          }
+          },
+          bindValue1: String,
+          bindValue2: String,
+          bindValue3: String,
         };
+      }
+
+      _export(e) {
+        this.bindValue1 = e.detail.exports["text/plain"];
       }
 
       ready() {
         super.ready();
         Polymer.RenderStatus.afterNextRender(this, () => {
-          console.log("toto");
           this.myApplicationKey = applicationkeys.applicationKey;
           this.myHmacKey = applicationkeys.hmacKey;
           this.myUnloaded = false;
