@@ -59,7 +59,9 @@
       }
 
       _export(e) {
-        this.activeElement.value = e.detail.exports["text/plain"];
+        if (this.activeElement !== undefined) {
+          this.activeElement.value = e.detail.exports["text/plain"];
+        }
       }
 
       ready() {
