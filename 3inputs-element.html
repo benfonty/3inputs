@@ -11,6 +11,7 @@
       }
       #textInput {
         height: calc(100vh - 50px);
+        --myscript-editor-background: url(moitie_du_ciel.jpg) 0px 0px/500px 500px;
       }
     </style>
   <paper-input id="input1" on-focused-changed="_focus" >
@@ -19,7 +20,16 @@
   </paper-input>
   <paper-input id="input3" on-focused-changed="_focus" >
   </paper-input>
-  <myscript-text-web on-exported="_export" unloaded="[[myUnloaded]]" id="textInput" host="webdemoapi.myscript.com" applicationkey="[[myApplicationKey]]" hmackey="[[myHmacKey]]" language="fr_FR"></myscript-text-web>
+  <myscript-text-web on-exported="_export" 
+    
+    penwidth="5" 
+    pencolor="rgb(221, 10, 80);" 
+    unloaded="[[myUnloaded]]" 
+    id="textInput" 
+    host="webdemoapi.myscript.com" 
+    applicationkey="[[myApplicationKey]]" 
+    hmackey="[[myHmacKey]]" 
+    language="fr_FR"></myscript-text-web>
   </template>
 
   <script>
