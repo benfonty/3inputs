@@ -11,7 +11,10 @@
       }
       #textInput {
         height: calc(100vh - 50px);
-        --myscript-editor-background: url(moitie_du_ciel.jpg) 0px 0px/500px 500px;
+        --myscript-text-web-background: url(moitie_du_ciel.jpg) 0px 0px/500px 500px;
+        --myscript-editor-line-pattern: {
+          background-image: none
+        }
       }
     </style>
   <paper-input id="input1" on-focused-changed="_focus" >
@@ -21,7 +24,7 @@
   <paper-input id="input3" on-focused-changed="_focus" >
   </paper-input>
   <myscript-text-web on-exported="_export" 
-    
+    themewidth="5"
     penwidth="5" 
     pencolor="rgb(221, 10, 80);" 
     unloaded="[[myUnloaded]]" 
@@ -29,6 +32,8 @@
     host="webdemoapi.myscript.com" 
     applicationkey="[[myApplicationKey]]" 
     hmackey="[[myHmacKey]]" 
+    disablecontrols
+    disableexportpanel
     language="fr_FR"></myscript-text-web>
   </template>
 
