@@ -10,31 +10,54 @@
         display: block;
       }
       #textInput {
-        height: calc(100vh - 50px);
-        --myscript-text-web-background: url(moitie_du_ciel.jpg) 0px 0px/500px 500px;
+        height: 100%;
+        width: 100%;
+        --myscript-text-web-background: url(moitie_du_ciel.jpg);
         --myscript-editor-line-pattern: {
           background-image: none
         }
       }
+
+      #container {
+        height: 842px;
+        width: 595px;
+        position: relative
+      }
+
+      #textInput,
+      #inputs {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #inputs {
+        z-index: 10;
+      }
+      
     </style>
-  <paper-input id="input1" on-focused-changed="_focus" >
-  </paper-input>
-  <paper-input id="input2" on-focused-changed="_focus" >
-  </paper-input>
-  <paper-input id="input3" on-focused-changed="_focus" >
-  </paper-input>
-  <myscript-text-web on-exported="_export" 
-    themewidth="5"
-    penwidth="5" 
-    pencolor="rgb(221, 10, 80);" 
-    unloaded="[[myUnloaded]]" 
-    id="textInput" 
-    host="webdemoapi.myscript.com" 
-    applicationkey="[[myApplicationKey]]" 
-    hmackey="[[myHmacKey]]" 
-    disablecontrols
-    disableexportpanel
-    language="fr_FR"></myscript-text-web>
+    <div id="container">
+      <div id="inputs">
+        <paper-input id="input1" on-focused-changed="_focus" >
+        </paper-input>
+        <paper-input id="input2" on-focused-changed="_focus" >
+        </paper-input>
+        <paper-input id="input3" on-focused-changed="_focus" >
+        </paper-input>
+      </div>
+    
+    <myscript-text-web on-exported="_export" 
+      themewidth="5"
+      penwidth="5" 
+      pencolor="rgb(221, 10, 80);" 
+      unloaded="[[myUnloaded]]" 
+      id="textInput" 
+      host="webdemoapi.myscript.com" 
+      applicationkey="[[myApplicationKey]]" 
+      hmackey="[[myHmacKey]]" 
+      disablecontrols
+      disableexportpanel
+      language="fr_FR"></myscript-text-web>
+  </div>
   </template>
 
   <script>
