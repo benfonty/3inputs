@@ -1,6 +1,7 @@
 <link rel="import" href="bower_components/polymer/polymer-element.html">
 <link rel="import" href="bower_components/myscript-text-web/myscript-text-web.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href = "/bower_components/iron-a11y-keys/iron-a11y-keys.html">
 <script type= "text/javascript" src="application-keys.js"></script>
 
 <dom-module id="three-inputs-element">
@@ -33,16 +34,21 @@
       #inputs {
         z-index: 10;
       }
+
+      .inputs {
+        display:block;
+      }
       
     </style>
+    <iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="_enter"></iron-a11y-keys>
     <div id="container">
       <div id="inputs">
-        <paper-input id="input1" on-focused-changed="_focus" >
-        </paper-input>
-        <paper-input id="input2" on-focused-changed="_focus" >
-        </paper-input>
-        <paper-input id="input3" on-focused-changed="_focus" >
-        </paper-input>
+        <span class="inputs" id="input1">
+        </span>
+        <span class="inputs" id="input2">
+        </span>
+        <span class="inputs" id="input3">
+        <span>
       </div>
     
     <myscript-text-web on-exported="_export" 
@@ -56,7 +62,7 @@
       hmackey="[[myHmacKey]]" 
       disablecontrols
       disableexportpanel
-      language="fr_FR"></myscript-text-web>
+      language="[[language]]"></myscript-text-web>
   </div>
   </template>
 
@@ -80,25 +86,30 @@
             value: true
           },
           activeElement: Object,
+          target: Object,
+          language: String
         };
       }
 
-      _focus(e) {
-        if (e.detail.value) {
-          this.activeElement = e.path[0];
-          this.$.textInput.clear();
-          if (this.activeElement.value !== undefined) {
-            this.$.textInput.importContent(
-                    {x:0,y:0},
-                    this.activeElement.value,
-                    "text/plain");
-          }
-        }
+      _enter(e) {
+        this.$.textInput.clear();
+        this.activeElement=this.generator.next().value;
+      }
+
+      * _getNextSentence() {
+        this.language = "fr_FR";
+        yield this.$.input1;
+
+        this.language = "pl_PL";
+        yield this.$.input2;
+
+        this.language = "fr_FR";
+        yield this.$.input3;
       }
 
       _export(e) {
         if (this.activeElement !== undefined) {
-          this.activeElement.value = e.detail.exports["text/plain"];
+          this.activeElement.innerText = e.detail.exports["text/plain"];
         }
       }
 
@@ -108,6 +119,9 @@
           this.myApplicationKey = applicationkeys.applicationKey;
           this.myHmacKey = applicationkeys.hmacKey;
           this.myUnloaded = false;
+          this.target = document.querySelector('body');
+          this.generator = this._getNextSentence();
+          this.activeElement=this.generator.next().value;
         });
       }
     }

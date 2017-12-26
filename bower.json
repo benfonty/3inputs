@@ -5,8 +5,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "myscript-text-web": "^4.0.1",
-    "iron-input": "PolymerElements/iron-input#^2.0.1",
-    "paper-input": "PolymerElements/paper-input#^2.0.5"
+    "iron-a11y-keys": "PolymerElements/iron-a11y-keys#^2.0.0"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
