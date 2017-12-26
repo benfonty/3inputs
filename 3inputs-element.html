@@ -28,43 +28,58 @@
         position: relative
       }
 
+      .yearInput {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
       #textInput,
-      #inputs {
+      .inputs {
         position: absolute;
         top: 0;
         left: 0;
       }
-      #inputs {
+
+      .top {
         z-index: 10;
       }
 
-      .inputs {
+      .text {
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: x-large;
         display:block;
+      }
+
+      .year {
+        font-size: xx-large;
       }
       
     </style>
     <iron-a11y-keys id="a11y" target="[[target]]" keys="enter" on-keys-pressed="_enter"></iron-a11y-keys>
     <div id="container">
-      <div id="inputs">
-        <span class="inputs" id="input1">
-        </span>
-        <span class="inputs" id="input2">
-        </span>
-        <span class="inputs" id="input3">
-        <span>
+        <myscript-text-web on-exported="_export" 
+        themewidth="2"
+        penwidth="2" 
+        unloaded="[[myUnloaded]]" 
+        id="textInput" 
+        host="webdemoapi.myscript.com" 
+        applicationkey="[[myApplicationKey]]" 
+        hmackey="[[myHmacKey]]" 
+        disablecontrols
+        disableexportpanel
+        language="[[language]]"></myscript-text-web>
+      <div class="inputs top">
+        <span class="text" id="input1"></span>
+        <span class="text" id="input2"></span>
+        <span class="text" id="input3"></span>
       </div>
+      <div class="yearInput top">
+        <span class="text year" id="input4"></span>
+      </div>
+      
     
-    <myscript-text-web on-exported="_export" 
-      themewidth="2"
-      penwidth="2" 
-      unloaded="[[myUnloaded]]" 
-      id="textInput" 
-      host="webdemoapi.myscript.com" 
-      applicationkey="[[myApplicationKey]]" 
-      hmackey="[[myHmacKey]]" 
-      disablecontrols
-      disableexportpanel
-      language="[[language]]"></myscript-text-web>
+      
   </div>
   </template>
 
@@ -113,8 +128,8 @@
       ready() {
         super.ready();
         Polymer.RenderStatus.afterNextRender(this, () => {
-          this.languages = ["fr_FR","pl_PL","fr_FR"];
-          this.elements = [this.$.input1, this.$.input2, this.$.input3];
+          this.languages = ["fr_FR","pl_PL","fr_FR",,"fr_FR"];
+          this.elements = [this.$.input1, this.$.input2, this.$.input3, this.$.input4];
           this.i = 0;
 
           this.myApplicationKey = applicationkeys.applicationKey;
