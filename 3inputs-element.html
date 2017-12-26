@@ -55,9 +55,8 @@
       </div>
     
     <myscript-text-web on-exported="_export" 
-      themewidth="5"
-      penwidth="5" 
-      pencolor="rgb(221, 10, 80);" 
+      themewidth="2"
+      penwidth="2" 
       unloaded="[[myUnloaded]]" 
       id="textInput" 
       host="webdemoapi.myscript.com" 
@@ -105,8 +104,9 @@
 
       _export(e) {
         if (this.activeElement !== undefined) {
-          this.activeElement.innerText = e.detail.exports["text/plain"];
-          console.log(e.detail.exports["text/plain"]);
+          let withoutLineBreak = e.detail.exports["text/plain"].replace(/\r\n|\r|\n/g," ");
+          this.activeElement.innerText = withoutLineBreak;
+          console.log(withoutLineBreak);
         }
       }
 
