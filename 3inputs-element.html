@@ -92,36 +92,36 @@
       }
 
       _enter(e) {
+        this.myUnloaded = true;
         this.$.textInput.clear();
-        this.activeElement=this.generator.next().value;
-      }
-
-      * _getNextSentence() {
-        this.language = "fr_FR";
-        yield this.$.input1;
-
-        this.language = "pl_PL";
-        yield this.$.input2;
-
-        this.language = "fr_FR";
-        yield this.$.input3;
+        this.i++;
+        this.activeElement = this.elements[this.i];
+        this.language = this.languages[this.i];
+        this.myUnloaded = false;
       }
 
       _export(e) {
         if (this.activeElement !== undefined) {
           this.activeElement.innerText = e.detail.exports["text/plain"];
+          console.log(e.detail.exports["text/plain"]);
         }
       }
 
       ready() {
         super.ready();
         Polymer.RenderStatus.afterNextRender(this, () => {
+          this.languages = ["fr_FR","pl_PL","fr_FR"];
+          this.elements = [this.$.input1, this.$.input2, this.$.input3];
+          this.i = 0;
+
           this.myApplicationKey = applicationkeys.applicationKey;
           this.myHmacKey = applicationkeys.hmacKey;
+
+          this.activeElement = this.elements[this.i];
+          this.language = this.languages[this.i];
+
           this.myUnloaded = false;
           this.target = document.querySelector('body');
-          this.generator = this._getNextSentence();
-          this.activeElement=this.generator.next().value;
         });
       }
     }
