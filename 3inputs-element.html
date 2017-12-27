@@ -61,6 +61,8 @@
         <myscript-text-web on-exported="_export" 
         themewidth="2"
         penwidth="2" 
+        themecolor="[[textColor]]"
+        pencolor="[[textColor]]"
         unloaded="[[myUnloaded]]" 
         id="textInput" 
         host="webdemoapi.myscript.com" 
@@ -104,7 +106,8 @@
           },
           activeElement: Object,
           target: Object,
-          language: String
+          language: String,
+          textColor: String
         };
       }
 
@@ -137,6 +140,8 @@
 
           this.activeElement = this.elements[this.i];
           this.language = this.languages[this.i];
+
+          this.textColor = "#CC8000";
 
           this.myUnloaded = false;
           this.target = document.querySelector('body');
