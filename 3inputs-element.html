@@ -23,7 +23,7 @@
       }
 
       #container {
-        height: 750px;
+        height: 641px;
         width: 1000px;
         position: relative
       }
@@ -131,8 +131,8 @@
       ready() {
         super.ready();
         Polymer.RenderStatus.afterNextRender(this, () => {
-          this.languages = ["fr_FR","pl_PL","fr_FR","fr_FR"];
-          this.elements = [this.$.input1, this.$.input2, this.$.input3, this.$.input4];
+          this.languages = ["fr_FR","pl_PL","fr_FR"];
+          this.elements = [this.$.input1, this.$.input2, this.$.input4];
           this.i = 0;
 
           this.myApplicationKey = applicationkeys.applicationKey;
